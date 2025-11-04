@@ -64,18 +64,22 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
+let obstacleInterval;
+
 function startGame() {
     score = 0;
     scoreElement.textContent = score;
     player.x = canvas.width / 2 - 25;
     obstacles = [];
     gameRunning = true;
+    clearInterval(obstacleInterval);
+    obstacleInterval = setInterval(createObstacle, 1000);
     gameLoop();
-    setInterval(createObstacle, 1000);
 }
 
 function endGame() {
     gameRunning = false;
+    clearInterval(obstacleInterval);
     alert('Game Over! Your score: ' + score);
 }
 
